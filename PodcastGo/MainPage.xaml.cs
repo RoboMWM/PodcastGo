@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
@@ -28,6 +30,9 @@ namespace PodcastGo
         public MainPage()
         {
             this.InitializeComponent();
+            mediaPlayerElement.TransportControls.IsCompact = true;
+            mediaPlayerElement.TransportControls.IsFullWindowButtonVisible = false;
+            mediaPlayerElement.TransportControls.IsZoomButtonVisible = false;
         }
 
         private async void FilePickerButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +53,9 @@ namespace PodcastGo
             }
 
             fileNameBlock.Text = file.DisplayName;
+
+            mediaPlayerElement.Source = MediaSource.CreateFromStorageFile(file);
+            mediaPlayerElement.MediaPlayer.AudioCategory = MediaPlayerAudioCategory.Media;
         }
     }
 }

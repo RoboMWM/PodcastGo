@@ -12,6 +12,7 @@
         <StackPanel>
             <Button x:Name="filePickerButton" Content="Choose an audio file" Click="FilePickerButton_Click"/>
             <TextBlock x:Name="fileNameBlock" Text="No file selected"/>
+            <MediaPlayerElement x:Name="mediaPlayerElement" AreTransportControlsEnabled="True" HorizontalAlignment="Stretch"/>
         </StackPanel>
     </ScrollViewer>
 </Page>
