@@ -8,7 +8,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <ScrollViewer>
+        <StackPanel>
+            <Button x:Name="filePickerButton" Content="Choose an audio file" Click="FilePickerButton_Click"/>
+            <TextBlock x:Name="fileNameBlock" Text="No file selected"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

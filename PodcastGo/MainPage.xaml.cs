@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +24,30 @@ namespace PodcastGo
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        StorageFile file;
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private async void FilePickerButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
+            openPicker.FileTypeFilter.Add(".mp3");
+            openPicker.FileTypeFilter.Add(".m4a");
+            openPicker.FileTypeFilter.Add(".aac");
+            openPicker.FileTypeFilter.Add(".wma");
+            openPicker.FileTypeFilter.Add(".ogg");
+            openPicker.FileTypeFilter.Add(".flac");
+            file = await openPicker.PickSingleFileAsync();
+
+            if (file == null) //TODO: logic to stop player
+            {
+                return;
+            }
+
+            fileNameBlock.Text = file.DisplayName;
         }
     }
 }
